@@ -4,19 +4,31 @@
 
 > MaxList模块主要是对Java集合中存储大数据的相关介绍。
 
-最近在项目中遇到了List集合中的数据要去重，大概一个600万的List吧，需要跟一个5万的List去去重。
+背景: 最近在项目中遇到了List集合中的数据要去重，大概一个2500万的数据，开始存储在List中，需要跟一个5万的List去去重。
 
-## 单例模式（饿汉模式）
+### 直接两个List去重  
 
+说到去重，稍微多讲一点啊，去重的时候有点小伙伴可能直接对List 循环后直接删除,
+其实这种是错误的(java.util.ConcurrentModificationException)，大家可以自己去试一下；
+这里我就不贴代码了，直接说下原因。首先，你还在遍历这个list,然后你就在遍历的过程中对list进行删除。
+如果你知道list是线程不安全的,你就很容易理解了。你在进行遍历的过程中又进行了删除操作，明显是错误的。
 ```sh
-public  class  Logger
-{
-    private  static  Logger  instance = new Logger();
-    private  Logger() { }
-    public  static  Logger  GetInstance()
-    {
-        return instance;
-    }
+public static void deWeightList(List<String> des, List<String> sourse){
+        if(sourse == null || sourse.size() <= 0){
+            return;
+        }l
+        Iterator<String> listStr = sourse.iterator();
+        while (listStr.hasNext()){
+            String item = listStr.next();
+            for (String ditem: des) {
+                if(item.equals(ditem)){
+                    listStr.remove();
+                    break;
+                }
+            }
+
+        }
+        logger.info("after deWight list size: " + sourse.size());
 }
 ```
 

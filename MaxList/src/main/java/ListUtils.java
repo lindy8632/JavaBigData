@@ -12,8 +12,8 @@ public class ListUtils {
 
 
     public static List maxArrayList(){
-        List<String> strArrayList = new ArrayList<String>(1000000);
-        for(int i = 0; i < 1000000; i ++){
+        List<String> strArrayList = new ArrayList<String>(2500000);
+        for(int i = 0; i < 2500000; i ++){
             strArrayList.add( i + "test");
         }
         return strArrayList;
@@ -37,7 +37,7 @@ public class ListUtils {
 
     public static List testList(){
         List<String> testList = new ArrayList<String>();
-        for(int i = 0; i < 20000; i++){
+        for(int i = 0; i < 50000; i++){
             testList.add(i + "test");
         }
         return testList;
