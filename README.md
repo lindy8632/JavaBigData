@@ -149,14 +149,14 @@ for (String item: maxArrayList) {
 14:52:02,408 INFO  [RunTest:37] start test list:17-11-07 14:52:02
 14:59:49,828 INFO  [ListUtils:66] after deWight list size: 9980000
 14:59:49,829 INFO  [RunTest:39] end test list:17-11-07 14:59:49
-<br/>
+
 2.list结合set去重时间:
 14:59:53,226 INFO  [RunTest:44] start test set:17-11-07 14:59:53
 15:01:30,079 INFO  [ListUtils:80] after deWight list size: 9980000
 15:01:30,079 INFO  [RunTest:46] end test set:17-11-07 15:01:30
 
 下面是2500万的list和20000的list去重两种方式所花的时间,可以看出使用set去重的效率要更加的高，(数据量越大越明显)。
-1.遍历过程中结合set去重:
+1.遍历过程中结合set去重:(个人最为推荐的原因之一，效率搞到令人爽到不行)
 15:17:45,762 INFO  [RunTest:24] start test foreach list directly, start time: 17-11-07 15:17:45
 15:17:47,114 INFO  [RunTest:32] end test foreach list directly, end time: 17-11-07 15:17:47
 
