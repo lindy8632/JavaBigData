@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,33 +15,42 @@ public class RunTest {
     public static void main(String[] args) {
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-        List<String> maxArrayList = ListUtils.maxArrayList();
-        List<String> maxLinkedList = new LinkedList<String>();
+        List<String> maxArrayList = ListUtils.maxArrayList(25000000);
 //        Set<String> maxSet = new HashSet<String>(maxArrayList);
 //        maxSet.addAll(maxArrayList);
 
-        maxLinkedList.addAll(maxArrayList);
+        List<String> testList = ListUtils.testList(20000);
+        Set<String> testSet = ListUtils.testSet(20000);
 
-        List<String> testList = ListUtils.testList();
+
+        //遍历过程中去重
+        logger.info("start test foreach list directly, start time: " + sdf.format(new Date()));
+
+        for (String item: maxArrayList) {
+            if(testSet.contains(item)){
+                //TODO
+            }
+        }
+
+        logger.info("end test foreach list directly, end time: " + sdf.format(new Date()) + "\n");
 
 
-        logger.info("start test ArrayList, start time: " + sdf.format(new Date()));
+        //List结合List去重
+        logger.info("start test list, start time: " + sdf.format(new Date()));
 
         ListUtils.deWeightList(testList, maxArrayList);
 
-        logger.info("end test ArrayList, end time: " + sdf.format(new Date()));
+        logger.info("end test list, end time: " + sdf.format(new Date()) + "\n");
 
-        logger.info("start test LinkedList, start time: " + sdf.format(new Date()));
+        maxArrayList.clear();
+        maxArrayList = ListUtils.maxArrayList(25000000);
 
-        ListUtils.deWeightList(testList, maxLinkedList);
+        //List结合Set去重
+        logger.info("start test set, start time: " + sdf.format(new Date()));
 
-        logger.info("end test LinkedList, end time: " + sdf.format(new Date()));
-//
-//        logger.info("start test Set, start time: " + sdf.format(new Date()));
-//
-//        ListUtils.deWeightSet(testList, maxSet);
-//
-//        logger.info("end test Set, end time: " + sdf.format(new Date()));
+        ListUtils.deWeightList(testSet, maxArrayList);
+
+        logger.info("end test set, end time: " + sdf.format(new Date()));
 
 
     }

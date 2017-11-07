@@ -1,3 +1,4 @@
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,86 +11,80 @@ public class ListUtils {
 
     private final static Logger logger = LoggerFactory.getLogger(ListUtils.class);
 
-
-    public static List maxArrayList(){
-        List<String> strArrayList = new ArrayList<String>(2500000);
-        for(int i = 0; i < 2500000; i ++){
-            strArrayList.add( i + "test");
-        }
-        return strArrayList;
-    }
-
-    public static List maxLinkedList(){
-        List<String> strList = new LinkedList<String>();
-        for(int i = 0; i < 1000000; i ++){
-            strList.add( i + "test");
+    public static List maxArrayList(int size) {
+        List<String> strList = new ArrayList<String>(size);
+        for (int i = 0; i < size; i++) {
+            strList.add(i + "test");
         }
         return strList;
     }
 
-    public static Set maxSet(){
-        Set<String> set = new HashSet<String>(1000000);
-        for(int i = 0; i < 1000000; i ++){
-            set.add( i + "test");
+    public static List maxList(int size) {
+        List<String> strList = new LinkedList<String>();
+        for (int i = 0; i < size; i++) {
+            strList.add(i + "test");
         }
-        return set;
+        return strList;
     }
 
-    public static List testList(){
+    public static List testList(int size) {
         List<String> testList = new ArrayList<String>();
-        for(int i = 0; i < 50000; i++){
+        for (int i = 0; i < size; i++) {
             testList.add(i + "test");
         }
         return testList;
     }
 
-    public static void deWeightList(String des, List<String> sourse){
-        if(sourse == null || sourse.size() <= 0){
-            return;
+    public static Set testSet(int size) {
+        Set<String> testSet = new HashSet<String>();
+        for (int i = 0; i < size; i++) {
+            testSet.add(i + "test");
         }
-        Iterator<String> listStr = sourse.iterator();
-        while (listStr.hasNext()){
-            String item = listStr.next();
-            if(item.equals(des)){
-                listStr.remove();
-            }
-        }
-        //logger.info("after deWight list size: " + sourse.size());
+        return testSet;
     }
 
-    public static void deWeightList(List<String> des, List<String> sourse){
-        if(sourse == null || sourse.size() <= 0){
+    public static void deWeightList(List<String> des, List<String> sourse) {
+        if (sourse == null || sourse.size() <= 0) {
             return;
         }
         Iterator<String> listStr = sourse.iterator();
-        while (listStr.hasNext()){
+        while (listStr.hasNext()) {
             String item = listStr.next();
-            for (String ditem: des) {
-                if(item.equals(ditem)){
-                    listStr.remove();
-                    break;
-                }
+            if (des.contains(item)) {
+                listStr.remove();
             }
-
         }
         logger.info("after deWight list size: " + sourse.size());
     }
 
-    public static void deWeightSet(List<String> des, Set<String> sourse){
-        if(sourse == null || sourse.size() <= 0){
+    public static void deWeightList(Set<String> des, List<String> sourse) {
+        if (sourse == null || sourse.size() <= 0) {
             return;
         }
-        Iterator<String> setStr = sourse.iterator();
-        while (setStr.hasNext()){
-            String item = setStr.next();
-            for (String ditem:des) {
-                if(item.equals(ditem)){
-                    setStr.remove();
+        Iterator<String> listStr = sourse.iterator();
+        while (listStr.hasNext()) {
+            String item = listStr.next();
+            if (des.contains(item)) {
+                listStr.remove();
+            }
+        }
+        logger.info("after deWight list size: " + sourse.size());
+    }
+
+    public static void deWeightListOther(List<String> des, List<String> sourse) {
+        if (sourse == null || sourse.size() <= 0) {
+            return;
+        }
+        for (int i = sourse.size() - 1; i >= 0; i--) {
+            String str = sourse.get(i);
+            for (String item : des) {
+                if (str.equals(item)) {
+                    sourse.remove(i);
                     break;
                 }
             }
         }
-        logger.info("after deWight set size: " + sourse.size());
+        logger.info("after other deWight list size: " + sourse.size());
     }
 
 }
