@@ -51,6 +51,8 @@ public class RunTest {
 
         logger.info("end test set, end time: " + sdf.format(new Date()));
 
+        maxArrayList.clear();
+        maxArrayList = ListUtils.maxArrayList(25000000);
         //List结合Set去重(不是直接对list进行删除，而是组装新list，考虑到list删除效率低)
         logger.info("start test set, start time: " + sdf.format(new Date()));
 
