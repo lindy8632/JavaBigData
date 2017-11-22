@@ -71,6 +71,27 @@ public class ListUtils {
         logger.info("after deWight list size: " + sourse.size());
     }
 
+    public static void deWeightListByNewList(Set<String> des, List<String> sourse) {
+        if (sourse == null || sourse.size() <= 0) {
+            return;
+        }
+        Iterator<String> listStr = sourse.iterator();
+        List<String> existList = new ArrayList<String>();
+        while (listStr.hasNext()) {
+            String item = listStr.next();
+            if(!des.contains(item)){
+                //TODO 对去重后的数据进行逻辑操作，不一定要删除，可以换个思路（是否可以直接逻辑操作，不一定非要再把数据写进集合后，然后遍历集合在进行逻辑操作）
+                existList.add(item); //改成添加进新的list，考虑到list的删除效率慢(非要得到删除后的集合的情况下，否则走else)
+            }
+            if (des.contains(item)) {
+                //listStr.remove(); //考虑到list的删除效率慢，此种方法对于大数据集合来说不合适
+            }
+        }
+        sourse.clear();
+        sourse = existList;
+        logger.info("after deWight list size: " + sourse.size());
+    }
+
     public static void deWeightListOther(List<String> des, List<String> sourse) {
         if (sourse == null || sourse.size() <= 0) {
             return;

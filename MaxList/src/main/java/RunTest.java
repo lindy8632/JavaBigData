@@ -20,14 +20,13 @@ public class RunTest {
 //        maxSet.addAll(maxArrayList);
 
         List<String> testList = ListUtils.testList(20000);
-        Set<String> testSet = ListUtils.testSet(20000);
-
+        Set<String> testSet = ListUtils.testSet(1500000);
 
         //遍历过程中去重
         logger.info("start test foreach list directly, start time: " + sdf.format(new Date()));
 
         for (String item: maxArrayList) {
-            if(testSet.contains(item)){
+            if(!testSet.contains(item)){
                 //TODO
             }
         }
@@ -49,6 +48,13 @@ public class RunTest {
         logger.info("start test set, start time: " + sdf.format(new Date()));
 
         ListUtils.deWeightList(testSet, maxArrayList);
+
+        logger.info("end test set, end time: " + sdf.format(new Date()));
+
+        //List结合Set去重(不是直接对list进行删除，而是组装新list，考虑到list删除效率低)
+        logger.info("start test set, start time: " + sdf.format(new Date()));
+
+        ListUtils.deWeightListByNewList(testSet, maxArrayList);
 
         logger.info("end test set, end time: " + sdf.format(new Date()));
 
